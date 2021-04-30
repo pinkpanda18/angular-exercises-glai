@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { of, merge, asyncScheduler } from 'rxjs';
-import { subscribeOn } from 'rxjs/operators';
+import { of, merge, asyncScheduler, from } from 'rxjs';
+import { every, subscribeOn } from 'rxjs/operators';
 
 @Component({
   selector: 'app-my-test',
@@ -12,13 +12,17 @@ export class MyTestComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    //this.subscribeOnOperator();
+    //this.subscribeOnOperator(); 
 
-    
- of(1, 2, 3, 4, 5, 6).pipe(
-    every(x => x < 5),
-)
-.subscribe(x => console.log(x)); // -> false
+    from([1, 2, 3, 4, 5, 6]).pipe(
+        every(x => x < 5), 
+    )
+    .subscribe(x => console.log(x)); // -> false
+
+    from([1, 2, 3, 4, 5, 6], asyncScheduler).pipe(
+        every(x => x < 5), 
+    )
+    .subscribe(x => console.log("hey")); // -> false
   }
 
 
