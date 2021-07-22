@@ -6,18 +6,14 @@ on:
       - master
       
 jobs:
-  build:
-    name: Build Angular App
+  build: 
     runs-on: ubuntu-latest
     steps:
-    - name: Get latest code
-      uses: actions/checkout@v2.3.2
-
-    - name: Use Node.js 14 LTS
-      uses: actions/setup-node@v2
+    - name: Checkout
+      uses: actions/checkout@v1
+    - uses: actions/setup-node@v1 #this installs node and npm for us
       with:
         node-version: '14'
-       
     - uses: actions/cache@v1
       with:
         path: ~/.npm
