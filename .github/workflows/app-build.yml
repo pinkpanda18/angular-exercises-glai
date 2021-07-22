@@ -6,8 +6,7 @@ on:
       - master
       
 jobs:
-  web-deploy:
-
+  build:
     name: Build Angular App
     runs-on: ubuntu-latest
     steps:
@@ -18,9 +17,20 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: '14'
-      
-    - name: Install NPM Modules
-      run: npm install
-
-    - name: Build Project
-      run: npm run build
+       
+    - uses: actions/cache@v1
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-    
+    - name: Build
+      run: |
+        npm install
+        npm run-script deploy
+    - name: Deploy
+      uses: JamesIves/github-pages-deploy-action@releases/v3
+      with:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        BRANCH: gh-pages
+        FOLDER: dist/angular-ci-cd
