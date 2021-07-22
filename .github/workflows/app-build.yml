@@ -21,11 +21,9 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-node-    
     - name: Build
-      env:
-        working_directory: ./src/
       run: |
         npm install
-        npm run-script build
+        npm run-script build --prod
     - name: Deploy
       uses: JamesIves/github-pages-deploy-action@releases/v3
       with:
