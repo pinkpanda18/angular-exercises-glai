@@ -5,11 +5,5 @@
     "types": [],
     "experimentalDecorators": true,
     "allowJs": true
-  },
-  "exclude": [
-    "test.ts",
-    "**/*.spec.ts",
-    "node_modules/ngx-extended-pdf-viewer/assets/additional-locale",
-    "node_modules/ngx-extended-pdf-viewer/assets/inline-locale-files"
-  ]
+  }
 }
